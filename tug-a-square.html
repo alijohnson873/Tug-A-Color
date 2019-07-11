@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tug-a-Color 2</title>
+
+    <style>
+
+      body{
+        font-family: sans-serif;
+        margin: 0 auto;
+      }
+      #container {
+        /* background: rgb(99, 178, 224); */
+        height: 100vh;
+        text-align: center;
+      }
+      #container2 {
+        /* background-color: brown; */
+        background-image: url("");
+        height: 30vw;
+        width: 30vw;
+        z-index: 5;
+        border: 5px solid black;
+       
+        top: 30%;
+      display: inline-block;
+        text-align: center;
+        border-radius: 25%;
+        margin-bottom: 200px;
+        position: relative;
+        /* background: rgb(36,0,29);
+        background: radial-gradient(circle, rgb(163, 46, 140) 0%, rgb(110, 84, 146) 50%, rgba(115,183,196,1) 100%); */
+       
+        
+      /* display: flex;
+      justify-content: flex-end;
+      align-items: center; */
+      }
+
+      .shape{
+          position: absolute;
+          top: 15%;
+          left: 5%;
+        
+      }
+
+      #circle{
+        opacity: 0;
+      }
+
+      #square{
+        opacity: 0;
+        }
+
+      .rope-end {
+        height:  5vw;
+        width: 5vw;
+        z-index: 7;
+        top: 50%;
+        position: absolute;
+        text-align: center;
+        border-radius: 50%;
+      }
+
+      #left {
+        left: 5vw;
+        background-color: red;
+        display: none;
+      }
+
+      #right {
+        right: 5vw;
+        background-color: rgb(0, 255, 13);
+        display: none;
+      }
+
+      h1{
+          padding: 50px;
+          font-size: 50px;
+      }
+
+      #reset{
+        position: absolute;
+        bottom: 10vh;
+      }
+
+      #score1 {
+        float: right;
+        padding: 70px;
+        
+        font-size: 30px;
+      }
+      #score2 {
+        float: left;
+        padding: 70px;
+       
+        font-size: 30px;
+      }
+
+      /* #head{
+          width: 100px;
+          height: 85px;
+          background: pink;
+          z-index: 10;
+          border-radius: 45%;
+          border: red solid 2px;
+          
+      } */
+    </style>
+  </head>
+  <body>
+    <div id="container">
+        <h1>Square a Circle</h1>
+        <h3 id="score1">Square score: 0</h3>
+        <h3 id="score2">Circle score: 0</h3>
+      <div id="container2">
+          <div class="shape" id="circle"><h1>
+              Yay I'm a Circle!
+          </h1></div>
+
+          <div class="shape" id="square"><h1>
+              Yay I'm a Square!
+          </h1></div>
+      </div>
+      <div class="rope-end" id="left"></div>
+      <div class="rope-end" id="right"></div>
+      <!-- <button id="reset">RESET</button> -->
+    </div>
+
+
+
+
+    <script>
+      const playerLeft = document.getElementById('left');
+      const playerRight = document.getElementById('right');
+      const container = document.getElementById("container2");
+    //   const rope = document.getElementById("container2");
+      const score1 = document.getElementById("score1");
+      const score2 = document.getElementById("score2");
+      const reset = document.getElementById("reset");
+      const square = document.getElementById("square");
+      const circle = document.getElementById("circle");
+        let ropePosition = 40;
+        let player1score = 0;
+        let player2score = 0;
+        let borderRadius = 25
+        let opacityCircle = 0;
+        let opacitySquare = 0
+
+
+      addEventListener("keydown", function(event) {
+            if (event.keyCode == 39) {
+            
+            borderRadius += 2;
+            container.style.borderRadius = `${borderRadius}%`;
+
+            opacityCircle += 0.07;
+            
+            circle.style.opacity = opacityCircle;
+            
+
+            
+            }
+            else if (event.keyCode == 37) {
+            borderRadius -= 1;
+            container.style.borderRadius = `${borderRadius}%`
+
+            opacitySquare += 0.05;
+            
+            square.style.opacity = opacitySquare;
+            
+          
+            }
+            if (borderRadius <= 0) {
+            alert('Square Wins!');
+            player1score += 1;
+            score1.innerText = "Square score :" + player1score;
+            borderRadius = 25;
+            container.style.borderRadius = `${borderRadius}%`
+            opacitySquare =0;
+            square.style.opacity = opacitySquare;
+            } 
+           else if (borderRadius >= 50) {
+            alert('Circle Wins!!')
+            player2score += 1;
+            score2.innerText = "Circle score :" + player2score;
+            borderRadius = 25;
+            container.style.borderRadius = `${borderRadius}%`
+            opacityCircle =0;
+            circle.style.opacity = opacityCircle;
+          }
+         
+      });
+
+      
+
+      
+
+      reset.addEventListener("click", function() {
+        player1score = 0;
+        player2score = 0;
+        score1.innerText = "Square score :" + player1score;
+        score2.innerText = "Circle score :" + player2score;
+      });
+
+     
+
+      
+    </script>
+  </body>
+</html>
