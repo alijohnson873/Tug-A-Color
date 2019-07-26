@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Tug-o-War</title>
-
+    <title>Tug-a-Colour</title>
     <style>
       body {
         font-family: sans-serif;
@@ -20,47 +19,42 @@
         );
         height: 100vh;
         text-align: center;
-      }
-      #container2 {
-        /* background-color: brown; */
-        /* height: 25px; */
-        width: 20vw;
-        /* z-index: 5;
-        border: 5px solid black; */
-        position: absolute;
-        top: 50%;
-        left: 40vw;
-        /* display: block; */
-      }
-
-      h1 {
         color: white;
-        padding: 100px;
-        font-size: 50px;
+      }
+      h1 {
+        padding: 200px;
+        font-size: 70px;
       }
 
       #reset {
         position: absolute;
         bottom: 10vh;
       }
-
       #score1 {
         float: right;
         padding: 70px;
-        color: white;
-        font-size: 30px;
+
+        font-size: 40px;
       }
       #score2 {
         float: left;
         padding: 70px;
+        font-size: 40px;
+      }
+      button {
+        background-color: transparent;
         color: white;
-        font-size: 30px;
+        font-size: 20px;
+        font-weight: bold;
+        border: 2px solid white;
+        border-radius: 10%;
+        padding: 15px;
       }
     </style>
   </head>
   <body>
     <div id="container">
-      <h1>Tug-a-Color</h1>
+      <h1>Tug-a-Colour</h1>
       <h3 id="score1">Orange score: 0</h3>
       <h3 id="score2">Purple score: 0</h3>
       <div id="container2"></div>
@@ -71,40 +65,30 @@
 
     <script>
       const container = document.getElementById("container");
-      const rope = document.getElementById("container2");
       const score1 = document.getElementById("score1");
       const score2 = document.getElementById("score2");
       const reset = document.getElementById("reset");
-      let ropePosition = 40;
       let player1score = 0;
       let player2score = 0;
       let gradientValue = 50;
 
       addEventListener("keydown", function(event) {
         if (event.keyCode == 39) {
-          ropePosition += 5;
-          rope.style.left = ropePosition + "vw";
-          gradientValue += 20;
+          gradientValue += 10;
           container.style.background = `linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) ${gradientValue}%, rgba(252,176,69,1) 100%)`;
         } else if (event.keyCode == 37) {
-          ropePosition -= 5;
-          rope.style.left = ropePosition + "vw";
-          gradientValue -= 7;
+          gradientValue -= 10;
           container.style.background = `linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) ${gradientValue}%, rgba(252,176,69,1) 100%)`;
         }
-        if (ropePosition <= 8) {
+        if (gradientValue <= -30) {
           alert("Orange Wins!");
           player1score += 1;
-          ropePosition = 40;
-          rope.style.left = 40 + "vw";
           score1.innerText = "Orange score :" + player1score;
           gradientValue = 50;
           container.style.background = `linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) ${gradientValue}%, rgba(252,176,69,1) 100%)`;
-        } else if (ropePosition >= 70) {
+        } else if (gradientValue >= 130) {
           alert("Purple Wins!!");
           player2score += 1;
-          ropePosition = 40;
-          rope.style.left = ropePosition + "vw";
           score2.innerText = "Purple score :" + player2score;
           gradientValue = 50;
           container.style.background = `linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) ${gradientValue}%, rgba(252,176,69,1) 100%)`;
